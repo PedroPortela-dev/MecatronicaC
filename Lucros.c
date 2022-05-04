@@ -1,46 +1,49 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
-#include <math.h>
+#include <stdbool.h>
+#include <string.h>
 
 int main(void){
 	
 	setlocale(LC_ALL, "Portuguese");
 	
-	int desejo;
-	double lucro, ganho, gasto;
+	char desejo[6];
+	double lucro, ganho, gasto, valor;
 	
 	do{
-		printf("Deseja anotar ganhos, digite 0: \n");
-		printf("Deseja anotar gastos, digite 1: \n");
-		printf("Deseja parar, digite 2\n");
-		scanf("%d", &desejo);
-		
-		switch(desejo){
-			case 0:
-				printf("Digite seu ganho: ");
-				scanf("%lf", &ganho);
-				lucro += ganho;
-				break;
-			case 1:
-				printf("Digite seu gasto: ");
-				scanf("%lf", &gasto);
-				lucro -= gasto;
-				break;
-			case 2:
-				break;
-			default:
-				printf("Invalido, digite novamente\n\n");	
-	
+		printf("\tDeseja anotar ganhos: \n");
+		printf("\tDeseja anotar gastos: \n");
+		printf("\tDeseja parar: \n");
+		scanf("%s", desejo);
+
+		if(strcmp(desejo, "ganhos") == 0){
+			printf("\tDigite seu ganho: ");
+			scanf("%lf", &valor);
+			ganho += valor;
+		}else if(strcmp(desejo, "gastos") == 0){
+			printf("\tDigite seu gasto: ");
+			scanf("%lf", &valor);
+			gasto += valor;
+		}else if(strcmp(desejo, "parar") == 0){
+			break;
+		}else{
+			printf("\tInvalido, digite novamente\n\n");
 		}
-	}while(desejo != 2);
+
+	}while(true);
+
+	lucro = ganho - gasto;
+
+	printf("\tSeu ganho foi %.2lf R$\n", ganho);
+	printf("\tSeu gasto foi %.2lf R$\n", gasto);
+	printf("\tSeu lucro foi %.2lf R$\n", lucro);
 	
-	printf("Seu lucro é %.2lf R$\n", lucro);
 	if(lucro>0){
-		printf("Você teve ganhos\n\n");
+		printf("\tVocê teve ganhos\n\n");
 	}else if(lucro<0){
-		printf("Você teve prejuiço\n\n");
+		printf("\tVocê teve prejuízo\n\n");
 	}else{
-		printf("Você não teve ganho nem prejuiço\n\n");
+		printf("\tVocê não teve ganho nem prejuízo\n\n");
 	}
 }
