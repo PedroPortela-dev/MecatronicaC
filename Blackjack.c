@@ -65,10 +65,12 @@ int main(void) {
 	struct jogador todosJogador[totalJogadores];
 	srand(time(NULL));
 	
+	//ainda nenhuma carta foi selecionada
 	for(i = 0; i<52; i++){
 		cartasSelecionadas[i] = -1;
 	}
 	
+	// distribuir 2 cartas para cada jogador
 	for(k = 0, i = 0; i < totalJogadores; i++)
 	{
 		for(j = 0; j < 2; j++)
@@ -88,6 +90,7 @@ int main(void) {
 		i = 0;
 		while(i<totalJogadores){
 			
+			// calculo da pontuação
 			todosJogador[i].pontos = 0;
 			for(j = 0; j<todosJogador[i].quantidadeCartas; j++){
 				todosJogador[i].pontos += todosJogador[i].cartas[j];
@@ -102,8 +105,10 @@ int main(void) {
 				continue;
 			}
 			
+			//se o jogador já tiver finalizado ele vai ser pulado
 			if(todosJogador[i].finalizou){
 				
+				i++;
 				continue;
 			}
 
@@ -152,6 +157,7 @@ int main(void) {
 			}
 		}
 
+		// caso ainda tenha alguém que ainda n finalizou o ciclo vai repetir
 		repetir = 0;
 		for(i = 0; i < totalJogadores; i++)
 		{
